@@ -1,6 +1,11 @@
 package com.tsystems.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tsystems.entity.enums.CargoStatus;
+
 import javax.persistence.*;
+import java.awt.image.ImageProducer;
+import java.util.List;
 
 /**
  * Cargo entity
@@ -14,23 +19,32 @@ public class Cargo {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "weight")
     private Integer weight;
 
     @Column(name = "status")
-    private Integer status;
+    @Enumerated(EnumType.STRING)
+    private CargoStatus status;
+
+//    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "city_from")
+    private City city_from;
+
+//    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "city_to")
+    private City city_to;
+
+//    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public Cargo() {
-    }
-
-    public Cargo(Integer id, String name, Integer weight, Integer status) {
-        this.id = id;
-        this.name = name;
-        this.weight = weight;
-        this.status = status;
     }
 
     public Integer getId() {
@@ -42,11 +56,11 @@ public class Cargo {
     }
 
     public String getName() {
-        return name;
+        return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String description) {
+        this.description = description;
     }
 
     public Integer getWeight() {
@@ -57,11 +71,55 @@ public class Cargo {
         this.weight = weight;
     }
 
-    public Integer getStatus() {
+    public CargoStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(CargoStatus status) {
         this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public City getCity_from() {
+        return city_from;
+    }
+
+    public void setCity_from(City city_from) {
+        this.city_from = city_from;
+    }
+
+    public City getCity_to() {
+        return city_to;
+    }
+
+    public void setCity_to(City city_to) {
+        this.city_to = city_to;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    @Override
+    public String toString() {
+        return "Cargo{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", weight=" + weight +
+                ", status=" + status +
+                ", city_from=" + city_from +
+                ", city_to=" + city_to +
+                '}';
     }
 }

@@ -7,7 +7,7 @@ import javax.servlet.Filter;
 public class AppInitializer extends org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{HibernateConfig.class};
+        return new Class[]{HibernateConfig.class, SecurityConfig.class};
     }
 
     @Override

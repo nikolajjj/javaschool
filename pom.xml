@@ -37,6 +37,28 @@
       <artifactId>spring-webmvc</artifactId>
       <version>5.2.1.RELEASE</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>5.2.1.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>5.2.1.RELEASE</version>
+    </dependency>
+    <!--To start using the security namespace in your application context-->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>5.2.1.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>5.2.1.RELEASE</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -88,6 +110,17 @@
       <artifactId>hibernate-validator</artifactId>
       <version>6.1.0.Final</version>
     </dependency>
+    <!-- Jackson -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.9.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.5</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -125,5 +158,15 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
