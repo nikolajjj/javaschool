@@ -1,0 +1,114 @@
+Index: javaschool/src/main/java/com/tsystems/controller/rest/OrderRestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- javaschool/src/main/java/com/tsystems/controller/rest/OrderRestController.java	(date 1588453132780)
++++ javaschool/src/main/java/com/tsystems/controller/rest/OrderRestController.java	(date 1588453132780)
+@@ -30,27 +30,12 @@
+     private final static Logger log = Logger.getLogger(OrderRestController.class);
+ 
+     @Autowired
+-    public void setCargoService(CargoService cargoService) {
++    public OrderRestController(CargoService cargoService, WagonService wagonService, DriverService driverService,
++                               OrderService orderService, DriverShiftService driverShiftService) {
+         this.cargoService = cargoService;
+-    }
+-
+-    @Autowired
+-    public void setWagonService(WagonService wagonService) {
+         this.wagonService = wagonService;
+-    }
+-
+-    @Autowired
+-    public void setDriverService(DriverService driverService) {
+         this.driverService = driverService;
+-    }
+-
+-    @Autowired
+-    public void setOrderService(OrderService orderService) {
+         this.orderService = orderService;
+-    }
+-
+-    @Autowired
+-    public void setDriverShiftService(DriverShiftService driverShiftService) {
+         this.driverShiftService = driverShiftService;
+     }
+ 
+Index: javaschool/src/main/java/com/tsystems/controller/rest/DriverRestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- javaschool/src/main/java/com/tsystems/controller/rest/DriverRestController.java	(date 1588453132770)
++++ javaschool/src/main/java/com/tsystems/controller/rest/DriverRestController.java	(date 1588453132770)
+@@ -0,0 +1,27 @@
++package com.tsystems.controller.rest;
++
++import com.tsystems.Util.ConverterUtil;
++import com.tsystems.entity.Converter.Converter;
++import com.tsystems.entity.Driver;
++import com.tsystems.service.api.DriverService;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.web.bind.annotation.GetMapping;
++import org.springframework.web.bind.annotation.RestController;
++
++import java.util.List;
++
++@RestController
++public class DriverRestController {
++    private DriverService driverService;
++
++    @Autowired
++    public DriverRestController(DriverService driverService) {
++        this.driverService = driverService;
++    }
++
++    @GetMapping("scoreboard/driver/get/list")
++    public String getDriversToScoreBoard() {
++        List<Driver> drivers = driverService.getAllDrivers();
++        return ConverterUtil.parseJson(Converter.getDriverDtos(drivers));
++    }
++}
+Index: javaschool/src/main/java/com/tsystems/controller/rest/StatisticRestController.java
+===================================================================
+--- javaschool/src/main/java/com/tsystems/controller/rest/StatisticRestController.java	(date 0)
++++ javaschool/src/main/java/com/tsystems/controller/rest/StatisticRestController.java	(date 0)
+@@ -1,37 +0,0 @@
+-package com.tsystems.controller.rest;
+-
+-import com.tsystems.Util.ConverterUtil;
+-import com.tsystems.dto.StatisticsCountDTO;
+-import com.tsystems.service.api.DriverService;
+-import com.tsystems.service.api.WagonService;
+-import org.springframework.web.bind.annotation.GetMapping;
+-import org.springframework.web.bind.annotation.RestController;
+-
+-import javax.management.j2ee.statistics.Statistic;
+-
+-@RestController
+-public class StatisticRestController {
+-    private WagonService wagonService;
+-    private DriverService driverService;
+-
+-    public StatisticRestController(WagonService wagonService, DriverService driverService) {
+-        this.wagonService = wagonService;
+-        this.driverService = driverService;
+-    }
+-
+-    @GetMapping
+-    public String sendStatistic() {
+-        Integer drivers = driverService.getAllDrivers().size();
+-        Integer freeDrivers = driverService.getAllDriversWithoutWagon().size();
+-        Integer busyDrivers = drivers - freeDrivers;
+-
+-        Integer wagons = wagonService.getAllWagons().size();
+-        Integer disabledWagons = wagonService.getAllDisableWagons().size();
+-        Integer busyWagons = wagonService.getAllBusyWagons().size();
+-        Integer freeWagons = wagons - busyWagons - disabledWagons;
+-
+-        StatisticsCountDTO statistic = new StatisticsCountDTO(drivers, freeDrivers, busyDrivers,
+-                wagons, freeWagons, busyWagons, disabledWagons);
+-        return ConverterUtil.parseJson()
+-    }
+-}

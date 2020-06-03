@@ -1,0 +1,15 @@
+com\tsystems\dto\WagonDTO.class
+com\tsystems\dto\enums\CargoStatus.class
+com\tsystems\dto\enums\OrderStatus.class
+com\tsystems\dto\enums\WagonStatus.class
+com\tsystems\dto\enums\RoutePointStatus.class
+com\tsystems\dto\UserDTO.class
+com\tsystems\dto\CityDTO.class
+com\tsystems\dto\OrderDTO.class
+com\tsystems\dto\enums\DriverStatus.class
+com\tsystems\dto\enums\Role.class
+com\tsystems\dto\MyOrderDTO.class
+com\tsystems\dto\CargoDTO.class
+com\tsystems\dto\StatisticsCountDTO.class
+com\tsystems\dto\DriverShiftDTO.class
+com\tsystems\dto\DriverDTO.class

@@ -1,0 +1,20 @@
+.scheduleTripTable tr {
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+}
+
+.table-header {
+    color: red;
+}
+
+.scheduleTripTable tr.trip-active td:nth-child(6) i {
+    color: #30e200;
+}
+
+.scheduleTripTable tr.trip-late td:nth-child(6) i {
+    color: orange;
+}
+
+.scheduleTripTable tr.trip-cancelled td:nth-child(6) i {
+    color: red;
+}

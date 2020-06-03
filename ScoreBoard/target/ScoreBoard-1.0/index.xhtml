@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <!--<link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="resources/css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" href="resources/css/navigation-transparent.css"/>
+    <link type="text/css" rel="stylesheet" href="resources/css/triptable.css"/>-->
+    <title>Cargo Transportation Company</title>
+</h:head>
+<h:body>
+    <ui:include src="navigation.jsp"/>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <p:dataTable id="scoreboards" value="#{userScoreBoard.statistic.orders}" var="order">
+                    <f:facet name="header" styleClass="table-header">Orders</f:facet>
+                    <p:column headerText="Id">
+                        <h:column>#{order.id}</h:column>
+                    </p:column>
+                    <p:column headerText="Number">
+                        <h:column>#{order.number}</h:column>
+                    </p:column>
+                    <p:column headerText="status">
+                        <h:column>#{order.orderStatus}</h:column>
+                    </p:column>
+                    <p:column headerText="Wagon">
+                        <h:column>#{order.wagon.car_plate}</h:column>
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <div class="col-4">
+                <table>
+                    <tr>
+                        <th>Wagons</th>
+                        <th>Drivers</th>
+                    </tr>
+                    <tr>
+                        <td>Amount - #{userScoreBoard.statistic.wagons}<br/>
+                        Free - #{userScoreBoard.statistic.freeWagons}<br/>
+                        Busy - #{userScoreBoard.statistic.busyWagons}<br/>
+                        Disabled - #{userScoreBoard.statistic.disabledWagons}
+                    </td>
+                        <td>Amount - #{userScoreBoard.statistic.drivers}<br/>
+                            Free - #{userScoreBoard.statistic.freeDrivers}<br/>
+                            Busy - #{userScoreBoard.statistic.busyDrivers}<br/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <h:form>
+        <f:websocket channel="ScoreBoardChannel">
+            <f:ajax event="updateScoreBoard" render=":scoreboards"/>
+        </f:websocket>
+    </h:form>
+</h:body>
+</html>
